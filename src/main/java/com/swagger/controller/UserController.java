@@ -3,6 +3,7 @@ package com.swagger.controller;
 import com.swagger.dto.UserDTO;
 import com.swagger.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,8 +52,12 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @PostMapping
+
+    @PostMapping("/create")
     @Operation(summary = "Create a new User")
+    @ApiResponse(responseCode = "201",description = "New User Successfully Created",
+    content = {@Content(mediaType = "application/xml"), @Content(mediaType = "application/json")},
+    headers = {@Header(name="Connection", description = "keep-alive")})
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.create(userDTO));
