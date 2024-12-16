@@ -3,6 +3,11 @@ package com.swagger.controller;
 import com.swagger.dto.UserDTO;
 import com.swagger.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +27,25 @@ public class UserController {
 
     @GetMapping("/all")
     @Operation(summary = "Read All Users")
+    @ApiResponses(
+            value={
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Users Successfully Retrieved",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(
+                                            schema = @Schema(
+                                                    implementation = UserDTO.class
+                                            )
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "400",description = "Bad Request",content = @Content),
+                    @ApiResponse(responseCode = "404",description = "User Not found",content = @Content),
+
+            }
+    )
     public ResponseEntity<List<UserDTO>> getAllUsers(){
 
         return ResponseEntity.ok(userService.getUsers());
