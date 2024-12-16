@@ -1,4 +1,4 @@
-INSERT INTO account_details (address, age, city, country, name, postal_code, state)
+INSERT INTO account_details (address, age, city, country, name, post_code, state)
 VALUES ('262  Lochmere Lane', 35, 'LOUISVILLE', 'United States', 'Josie D Story', '40289', 'Kentucky'),
        ('2903  Jarvis Street', 28, 'Buffalo', 'United States', 'Bernard P Fendley', '14211', 'New York'),
        ('4161  Alfred Drive', 47, 'Brooklyn', 'United States', 'Faith R Parsons', '11226', 'New York'),
